@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Peta Titik Survei BPS Manokwari (SSB & SHBJ)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: #0f172a; color: #1e293b; }
+    
+    #app-container { display: flex; width: 100%; height: 100%; position: relative; }
+    #map { flex: 1; height: 100%; z-index: 1; }
+
+    /* Floating Header Search & Pills */
+    .top-bar {
+      position: absolute; top: 12px; left: 12px; right: 12px; z-index: 1000;
+      display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+    }
+    .search-box {
+      pointer-events: auto; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(10px);
+      border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+      display: flex; align-items: center; padding: 8px 14px; gap: 10px;
+    }
+    .search-box input {
+      flex: 1; border: none; outline: none; font-size: 14px; background: transparent; color: #0f172a;
+    }
+    .search-box i { color: #64748b; font-size: 15px; }
+
+    .pills-scroll {
+      pointer-events: auto; display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .pills-scroll::-webkit-scrollbar { display: none; }
+    .pill {
+      white-space: nowrap; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      background: rgba(15, 23, 42, 0.85); color: #f8fafc; backdrop-filter: blur(8px);
+      cursor: pointer; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s;
+    }
+    .pill.active { background: #2563eb; color: #fff; border-color: #3b82f6; }
+    .pill-red.active { background: #dc2626; border-color: #ef4444; }
+    .pill-green.active { background: #16a34a; border-color: #22c55e; }
+
+    /* Quick Action Buttons (GPS, Satellite, List) */
+    .fab-group {
+      position: absolute; right: 14px; bottom: 85px; z-index: 1000;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .fab-btn {
+      width: 44px; height: 44px; border-radius: 22px; background: #ffffff;
+      color: #1e293b; border: none; box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+      cursor: pointer; transition: transform 0.15s, background 0.2s;
+    }
+    .fab-btn:active { transform: scale(0.92); }
+    .fab-btn.active { background: #2563eb; color: #fff; }
+
+    /* Bottom Sheet / Drawer */
+    #bottom-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 1001;
+      background: #ffffff; border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 25px rgba(0,0,0,0.2);
+      transform: translateY(calc(100% - 64px));
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column; max-height: 80vh;
+    }
+    #bottom-sheet.open { transform: translateY(0); }
+    #bottom-sheet.peek { transform: translateY(calc(100% - 190px)); }
+
+    .sheet-handle-bar {
+      padding: 10px 0 4px 0; display: flex; justify-content: center; cursor: pointer;
+    }
+    .sheet-handle {
+      width: 40px; height: 5px; border-radius: 3px; background: #cbd5e1;
+    }
+    .sheet-header {
+      padding: 6px 18px 12px 18px; border-bottom: 1px solid #f1f5f9;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .sheet-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .sheet-count { font-size: 12px; color: #64748b; font-weight: 600; }
+
+    .sheet-content {
+      flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px;
+    }
+
+    /* Respondent Card */
+    .resp-card {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 12px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px;
+    }
+    .resp-card:hover, .resp-card.active {
+      background: #eff6ff; border-color: #93c5fd;
+    }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+    .card-name { font-size: 14px; font-weight: 700; color: #0f172a; }
+    .badge {
+      display: inline-block; padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 700; color: #fff;
+    }
+    .badge-gabungan { background: #dc2626; }
+    .badge-ssb { background: #2563eb; }
+    .badge-shbj { background: #16a34a; }
+
+    .card-meta { font-size: 12px; color: #64748b; display: flex; flex-wrap: wrap; gap: 8px; }
+    .card-notes { font-size: 11px; color: #d97706; background: #fffbeb; padding: 4px 8px; border-radius: 6px; }
+
+    .card-actions {
+      display: flex; gap: 8px; margin-top: 4px;
+    }
+    .btn-action {
+      flex: 1; padding: 7px 10px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px;
+      border: none; cursor: pointer;
+    }
+    .btn-gmaps { background: #2563eb; color: #ffffff !important; }
+    .btn-detail { background: #e2e8f0; color: #334155 !important; }
+
+    /* Custom Leaflet Popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px; padding: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .leaflet-popup-content { margin: 10px; line-height: 1.4; }
+    .pop-title { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .pop-badge { margin-bottom: 6px; display: inline-block; }
+    .pop-info { font-size: 12px; color: #475569; margin-bottom: 8px; }
+    .pop-btn {
+      display: block; width: 100%; padding: 8px 10px; border-radius: 8px;
+      background: #2563eb; color: #fff !important; font-size: 12px; font-weight: 700;
+      text-align: center; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app-container">
+    <div id="map"></div>
+
+    <!-- Top floating search & filter -->
+    <div class="top-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Cari responden, toko, wilayah..." oninput="handleSearch()">
+        <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="clearSearch()"></i>
+      </div>
+      <div class="pills-scroll">
+        <div class="pill active" onclick="setFilter('ALL')">Semua (70)</div>
+        <div class="pill pill-red" onclick="setFilter('SSB & SHBJ (Gabungan)')">Gabungan (5)</div>
+        <div class="pill" onclick="setFilter('SSB')">SSB (22)</div>
+        <div class="pill pill-green" onclick="setFilter('SHBJ')">SHBJ (43)</div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="fab-group">
+      <button class="fab-btn" id="satBtn" title="Ganti Satelit" onclick="toggleSatellite()">
+        <i class="fa-solid fa-layer-group"></i>
+      </button>
+      <button class="fab-btn" id="gpsBtn" title="Lokasi Saya" onclick="locateUser()">
+        <i class="fa-solid fa-location-crosshairs"></i>
+      </button>
+      <button class="fab-btn" id="listBtn" title="Daftar Titik" onclick="toggleSheet()">
+        <i class="fa-solid fa-list-ul"></i>
+      </button>
+    </div>
+
+    <!-- Bottom Sheet / Drawer -->
+    <div id="bottom-sheet" class="peek">
+      <div class="sheet-handle-bar" onclick="toggleSheet()">
+        <div class="sheet-handle"></div>
+      </div>
+      <div class="sheet-header">
+        <span class="sheet-title">Daftar Titik Survei</span>
+        <span class="sheet-count" id="countLabel">70 Titik</span>
+      </div>
+      <div class="sheet-content" id="sheetList">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const pointsData = [{"no": 1, "nama": "Surya Manik", "lokasi": "Arah Bandara", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8693923, "lon": 134.0475218, "title": "SURYA MANIK masakan padang", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8693923,134.0475218", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8693923,134.0475218"}, {"no": 2, "nama": "Hokky Bakery", "lokasi": "Jalan Baru", "kategori": "SSB", "survei": "SSB", "notes": "kalawai toh", "lat": -0.8734685, "lon": 134.0474365, "title": "Kalawai Mart", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8734685,134.0474365", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8734685,134.0474365"}, {"no": 3, "nama": "Asrie Modesta", "lokasi": "Amban", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8533987, "lon": 134.0567484, "title": "ASRIE MODESTA", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8533987,134.0567484", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8533987,134.0567484"}, {"no": 4, "nama": "Primkoppal", "lokasi": "Sanggeng", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8677616, "lon": 134.0646472, "title": "PRIMKOPAL", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8677616,134.0646472", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8677616,134.0646472"}, {"no": 6, "nama": "Astra Sanggeng", "lokasi": "Sanggeng", "kategori": "SSB & SHBJ (Gabungan)", "survei": "SSB, SHBJ", "notes": "", "lat": -0.8632862, "lon": 134.0658172, "title": "Astra Motor Manokwari (Dealer motor Honda)", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632862,134.0658172", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632862,134.0658172"}, {"no": 7, "nama": "PT. Kreasi Auto Kencana (Ford)", "lokasi": "Wosi", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8647327, "lon": 134.05353, "title": "Ford Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8647327,134.05353", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8647327,134.05353"}, {"no": 9, "nama": "Bidang Cipta Karya Dinas PUPR Manokwari", "lokasi": "Ktr Gub", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.9184073, "lon": 134.0279201, "title": "Dinas PUPR Provinsi Papua Barat", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.9184073,134.0279201", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.9184073,134.0279201"}, {"no": 10, "nama": "Sagita", "lokasi": "Arfai", "kategori": "SSB", "survei": "SSB", "notes": "arfai tutup. kota kah?", "lat": -0.8597675, "lon": 134.0729196, "title": "Sagita Furniture - Cv Setia Abadi", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8597675,134.0729196", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8597675,134.0729196"}, {"no": 12, "nama": "Lestari", "lokasi": "Jalan Baru", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8703708, "lon": 134.0464348, "title": "RUMAH MAKAN LESTARI", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8703708,134.0464348", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8703708,134.0464348"}, {"no": 13, "nama": "Ama Bakkery", "lokasi": "Arfai", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.9295952, "lon": 134.0206594, "title": "Ama Cakes & Bakery", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.9295952,134.0206594", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.9295952,134.0206594"}, {"no": 14, "nama": "Jakarta Tailor", "lokasi": "Amban", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8396119, "lon": 134.0645476, "title": "5367+4RR, Jl. Gn. Salju, Amban, Kec. Manokwari Bar., Kabupaten Manokwari, Papua Bar. 98312", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8396119,134.0645476", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8396119,134.0645476"}, {"no": 16, "nama": "Sinar Suri", "lokasi": "Jalan Baru", "kategori": "SSB & SHBJ (Gabungan)", "survei": "SSB, SHBJ", "notes": "", "lat": -0.8683202, "lon": 134.0463768, "title": "Toyota", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8683202,134.0463768", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8683202,134.0463768"}, {"no": 18, "nama": "Toko Meubel depan Lin Hotel", "lokasi": "kota", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8547095, "lon": 134.0699276, "title": "Manggoapi art", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8547095,134.0699276", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8547095,134.0699276"}, {"no": 20, "nama": "Ibu Dinda", "lokasi": "Sanggeng", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8687915, "lon": 134.064641, "title": "warung ibudinda", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8687915,134.064641", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8687915,134.064641"}, {"no": 21, "nama": "Oriestom Bakery", "lokasi": "Arah Bandara", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8762108, "lon": 134.0501061, "title": "Oriestom Bay Hotel", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8762108,134.0501061", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8762108,134.0501061"}, {"no": 22, "nama": "Penjahit Kaca Bulat", "lokasi": "Wosi", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8654247, "lon": 134.0460965, "title": "Penjahit kaca bulat", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8654247,134.0460965", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8654247,134.0460965"}, {"no": 24, "nama": "Kawasaki", "lokasi": "borobudur", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8569325, "lon": 134.0707172, "title": "Dealer motor Kawasaki", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8569325,134.0707172", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8569325,134.0707172"}, {"no": 25, "nama": "DFSK", "lokasi": "anday", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.9427201, "lon": 134.0001288, "title": "Dfsk manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.9427201,134.0001288", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.9427201,134.0001288"}, {"no": 27, "nama": "Meubel Jepara", "lokasi": "pasar wosi", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8668946, "lon": 134.0491243, "title": "Jepara furniture Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8668946,134.0491243", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8668946,134.0491243"}, {"no": 28, "nama": "Toko Listrik Sinar Mulia (amban)", "lokasi": "Amban", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8459084, "lon": 134.0518252, "title": "TOKO LISTRIK SINAR MULIA", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8459084,134.0518252", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8459084,134.0518252"}, {"no": 29, "nama": "Depo Teguh", "lokasi": "kota", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8609788, "lon": 134.0740605, "title": "DepoTeguh", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8609788,134.0740605", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8609788,134.0740605"}, {"no": 30, "nama": "Sion Music (AMD)", "lokasi": "wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8642308, "lon": 134.0466876, "title": "SION MUSIC", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8642308,134.0466876", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8642308,134.0466876"}, {"no": 31, "nama": "Hadi (MCM)", "lokasi": "kota", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8569848, "lon": 134.0676451, "title": "Hadi Supermarket Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8569848,134.0676451", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8569848,134.0676451"}, {"no": 32, "nama": "Bengkel Honda (sanggeng)", "lokasi": "Sanggeng", "kategori": "SSB & SHBJ (Gabungan)", "survei": "SSB, SHBJ", "notes": "", "lat": -0.8632862, "lon": 134.0658172, "title": "Astra Motor Manokwari (Dealer motor Honda)", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632862,134.0658172", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632862,134.0658172"}, {"no": 33, "nama": "Bengkel Jepara", "lokasi": "pasar wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8669408, "lon": 134.049163, "title": "Jepara Motor Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8669408,134.049163", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8669408,134.049163"}, {"no": 34, "nama": "Bengkel Mobil Sinar Suri", "lokasi": "Jalan Baru", "kategori": "SSB & SHBJ (Gabungan)", "survei": "SSB, SHBJ", "notes": "", "lat": -0.8683202, "lon": 134.0463768, "title": "Toyota", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8683202,134.0463768", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8683202,134.0463768"}, {"no": 35, "nama": "Manokwari Jaya Ban", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8713832, "lon": 134.0463841, "title": "MANOKWARI JAYA BAN", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8713832,134.0463841", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8713832,134.0463841"}, {"no": 36, "nama": "Harapan Baru (borobudur)", "lokasi": "borobudur", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8571954, "lon": 134.0707854, "title": "Toko Harapan Baru", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8571954,134.0707854", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8571954,134.0707854"}, {"no": 37, "nama": "Indo Prima", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8632321, "lon": 134.0530846, "title": "PT. Indoprima Manokwari Perkasa", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632321,134.0530846", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632321,134.0530846"}, {"no": 38, "nama": "Surya Jaya", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8724348, "lon": 134.045919, "title": "Surya Jaya Group / Store", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8724348,134.045919", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8724348,134.045919"}, {"no": 39, "nama": "Alia", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "hj bauw", "lat": -0.8626151, "lon": 134.0525315, "title": "ALIA Digital Printing", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8626151,134.0525315", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8626151,134.0525315"}, {"no": 40, "nama": "Dunia Print", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "hj bauw", "lat": -0.8626433, "lon": 134.0528574, "title": "Dunia Print", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8626433,134.0528574", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8626433,134.0528574"}, {"no": 42, "nama": "Toko Listrik Golden Sheena (wosi)", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "sederet aneka bangunan", "lat": -0.8633123, "lon": 134.049549, "title": "Toko Listrik Golden Sheena", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8633123,134.049549", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8633123,134.049549"}, {"no": 43, "nama": "Depo Makmur", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "hj bauw", "lat": -0.8630402, "lon": 134.0521741, "title": "Depo Makmur Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8630402,134.0521741", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8630402,134.0521741"}, {"no": 44, "nama": "Glodok Makmur (hj bauw)", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "hj bauw", "lat": -0.8627747, "lon": 134.0525908, "title": "Glodok Makmur", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8627747,134.0525908", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8627747,134.0525908"}, {"no": 45, "nama": "Orchid", "lokasi": "kota", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.862605, "lon": 134.052124, "title": "Orchid", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.862605,134.052124", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.862605,134.052124"}, {"no": 46, "nama": "Bengkel Motor Sinar Suri", "lokasi": "Jalan Baru", "kategori": "SSB & SHBJ (Gabungan)", "survei": "SSB, SHBJ", "notes": "", "lat": -0.8683202, "lon": 134.0463768, "title": "Toyota", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8683202,134.0463768", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8683202,134.0463768"}, {"no": 47, "nama": "Makmur Motor", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8961207, "lon": 134.0448731, "title": "MAKMUR MOTOR", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8961207,134.0448731", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8961207,134.0448731"}, {"no": 48, "nama": "Auto Mobil", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8925414, "lon": 134.0460776, "title": "AUTO MOBIL", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8925414,134.0460776", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8925414,134.0460776"}, {"no": 49, "nama": "Serba Mulia Auto", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8722332, "lon": 134.0464767, "title": "PT. Serba Mulia Auto Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8722332,134.0464767", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8722332,134.0464767"}, {"no": 50, "nama": "Papua Ban", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8912579, "lon": 134.0465581, "title": "PAPUA BAN/ bakti makmur mobil", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8912579,134.0465581", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8912579,134.0465581"}, {"no": 51, "nama": "Senyum 5000 (jalan baru)", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.873093, "lon": 134.046274, "title": "Senyum 5000 (jalan baru)", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.873093,134.046274", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.873093,134.046274"}, {"no": 52, "nama": "CV Tintur", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "tintur jaya?", "lat": -0.8605253, "lon": 134.0470999, "title": "TINTUR JAYA", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8605253,134.0470999", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8605253,134.0470999"}, {"no": 53, "nama": "Itech", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.870568, "lon": 134.046436, "title": "Itech", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.870568,134.046436", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.870568,134.046436"}, {"no": 54, "nama": "Galilea", "lokasi": "kota", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8632236, "lon": 134.0741749, "title": "GALILEA KOMPUTER", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632236,134.0741749", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632236,134.0741749"}, {"no": 55, "nama": "X-ADVERTISING", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8707211, "lon": 134.0464724, "title": "X ADVERTISING", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8707211,134.0464724", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8707211,134.0464724"}, {"no": 57, "nama": "TIKI", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8669766, "lon": 134.0555701, "title": "TIKI Cabang Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8669766,134.0555701", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8669766,134.0555701"}, {"no": 58, "nama": "Chival Mandiri Cargo", "lokasi": "Bandara", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8878626, "lon": 134.0430209, "title": "PT. Chival Mandiri Cargo ( Chival Cargo )", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8878626,134.0430209", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8878626,134.0430209"}, {"no": 60, "nama": "Aneka Bangunan", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8631883, "lon": 134.0498559, "title": "ANEKA BANGUNAN", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8631883,134.0498559", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8631883,134.0498559"}, {"no": 61, "nama": "Mega Glodok (wosi)", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8632167, "lon": 134.0496346, "title": "Mega Glodok Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632167,134.0496346", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632167,134.0496346"}, {"no": 62, "nama": "Kalawai", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8734685, "lon": 134.0474365, "title": "Kalawai Mart", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8734685,134.0474365", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8734685,134.0474365"}, {"no": 63, "nama": "Ada Motor", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8707698, "lon": 134.0462692, "title": "Bengkel Ada Motor", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8707698,134.0462692", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8707698,134.0462692"}, {"no": 64, "nama": "Bengkel Manohara", "lokasi": "Arah Bandara", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8680115, "lon": 134.0468957, "title": "Bengkel Manohara-Wosi", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8680115,134.0468957", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8680115,134.0468957"}, {"no": 65, "nama": "Aneka Ban", "lokasi": "Jalan Baru", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8693934, "lon": 134.0462699, "title": "Aneka Ban & Variasi", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8693934,134.0462699", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8693934,134.0462699"}, {"no": 66, "nama": "Nurati", "lokasi": "Sanggeng", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8650034, "lon": 134.0655113, "title": "Toko Nur Ati", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8650034,134.0655113", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8650034,134.0655113"}, {"no": 67, "nama": "Rezeki (wosi)", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8643102, "lon": 134.0532698, "title": "Toko Rezeki Senang Hati", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8643102,134.0532698", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8643102,134.0532698"}, {"no": 68, "nama": "Surma Agung", "lokasi": "borobudur", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8572643, "lon": 134.0708406, "title": "SURMA AGUNG", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8572643,134.0708406", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8572643,134.0708406"}, {"no": 69, "nama": "Urban Tech", "lokasi": "anday", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.9294216, "lon": 134.0326572, "title": "UrbanTech Store", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.9294216,134.0326572", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.9294216,134.0326572"}, {"no": 70, "nama": "Toko ATK dekat AMD", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8639612, "lon": 134.0468837, "title": "Suri Gracia", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8639612,134.0468837", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8639612,134.0468837"}, {"no": 71, "nama": "Matahari Digital Printing", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8635931, "lon": 134.0476701, "title": "Matahari Digital Printing", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8635931,134.0476701", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8635931,134.0476701"}, {"no": 73, "nama": "Lion Parcel", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.854743, "lon": 134.0690309, "title": "Lion Parcel - Yos Soedarso MKW", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.854743,134.0690309", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.854743,134.0690309"}, {"no": 74, "nama": "JNE", "lokasi": "(Belum Ditentukan)", "kategori": "SHBJ", "survei": "SHBJ", "notes": "lupa letaknya, dekat klaten?", "lat": -0.8737928, "lon": 134.0491213, "title": "0°52'25.7\"S 134°02'56.8\"E", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8737928,134.0491213", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8737928,134.0491213"}, {"no": 75, "nama": "JNT", "lokasi": "(Belum Ditentukan)", "kategori": "SHBJ", "survei": "SHBJ", "notes": "lupa letaknya, ada di maps", "lat": -0.865709, "lon": 134.0541852, "title": "JnT Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.865709,134.0541852", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.865709,134.0541852"}, {"no": 77, "nama": "Daihatsu", "lokasi": "Jalan Baru", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8720387, "lon": 134.0465147, "title": "DAIHATSU MANOKWARI PT. Serba Mulia Auto", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8720387,134.0465147", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8720387,134.0465147"}, {"no": 78, "nama": "Dealer Resmi Mibil Honda - Wosi", "lokasi": "Wosi", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8661637, "lon": 134.0552012, "title": "DEALER RESMI MOBIL HONDA MANOKWARI", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8661637,134.0552012", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8661637,134.0552012"}, {"no": 79, "nama": "Trisakti Megah Indah- Suzuki", "lokasi": "Jalan Baru", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8745294, "lon": 134.0476531, "title": "Suzuki Manokwari Trisakti Megah Indah", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8745294,134.0476531", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8745294,134.0476531"}, {"no": 80, "nama": "Toko Perdana", "lokasi": "kota", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8554639, "lon": 134.0702895, "title": "Toko Perdana", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8554639,134.0702895", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8554639,134.0702895"}, {"no": 81, "nama": "Penjahit Raihan", "lokasi": "Sowi", "kategori": "SSB", "survei": "SSB", "notes": "", "lat": -0.8632573, "lon": 134.0477907, "title": "Penjahit Raihan", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8632573,134.0477907", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8632573,134.0477907"}, {"no": 82, "nama": "Makarios", "lokasi": "Sowi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8864007, "lon": 134.0460821, "title": "CV. MAKARIOS", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8864007,134.0460821", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8864007,134.0460821"}, {"no": 83, "nama": "Wicom", "lokasi": "Wosi", "kategori": "SHBJ", "survei": "SHBJ", "notes": "", "lat": -0.8630717, "lon": 134.050696, "title": "WICOM KOMPUTER - Toko Laptop, cctv, Printer & Servis Komputer Manokwari", "maps_url": "https://www.google.com/maps/search/?api=1&query=-0.8630717,134.050696", "dir_url": "https://www.google.com/maps/dir/?api=1&destination=-0.8630717,134.050696"}];
+
+    let currentFilter = 'ALL';
+    let searchQuery = '';
+    let activeSatellite = false;
+    let gpsMarker = null;
+
+    // Initialize Map
+    const map = L.map('map', {
+      zoomControl: false,
+      attributionControl: false
+    }).setView([-0.865, 134.06], 13);
+
+    // Tiles
+    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    const satLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+      maxZoom: 20
+    });
+
+    function toggleSatellite() {
+      const btn = document.getElementById('satBtn');
+      if (activeSatellite) {
+        map.removeLayer(satLayer);
+        map.addLayer(osmLayer);
+        btn.classList.remove('active');
+        activeSatellite = false;
+      } else {
+        map.removeLayer(osmLayer);
+        map.addLayer(satLayer);
+        btn.classList.add('active');
+        activeSatellite = true;
+      }
+    }
+
+    function locateUser() {
+      if (!navigator.geolocation) {
+        alert('Browser tidak mendukung GPS');
+        return;
+      }
+      const btn = document.getElementById('gpsBtn');
+      btn.style.color = '#2563eb';
+      navigator.geolocation.getCurrentPosition(pos => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        map.flyTo([lat, lon], 16);
+        if (gpsMarker) map.removeLayer(gpsMarker);
+        gpsMarker = L.circleMarker([lat, lon], {
+          radius: 9, fillColor: '#0284c7', color: '#fff', weight: 3, fillOpacity: 0.95
+        }).addTo(map).bindPopup('<b>Lokasi Anda Sekarang</b>').openPopup();
+        btn.style.color = '#1e293b';
+      }, err => {
+        alert('Gagal mengambil GPS: ' + err.message);
+        btn.style.color = '#1e293b';
+      }, { enableHighAccuracy: true });
+    }
+
+    // Sheet toggle
+    const sheet = document.getElementById('bottom-sheet');
+    function toggleSheet() {
+      if (sheet.classList.contains('open')) {
+        sheet.classList.remove('open');
+        sheet.classList.add('peek');
+      } else {
+        sheet.classList.add('open');
+        sheet.classList.remove('peek');
+      }
+    }
+
+    function getColor(kat) {
+      if (kat === 'SSB & SHBJ (Gabungan)') return '#dc2626';
+      if (kat === 'SSB') return '#2563eb';
+      return '#16a34a';
+    }
+
+    function getBadgeClass(kat) {
+      if (kat === 'SSB & SHBJ (Gabungan)') return 'badge-gabungan';
+      if (kat === 'SSB') return 'badge-ssb';
+      return 'badge-shbj';
+    }
+
+    let markerMap = {};
+
+    function render() {
+      // Filter data
+      const filtered = pointsData.filter(p => {
+        const matchKat = (currentFilter === 'ALL' || p.kategori === currentFilter);
+        const matchSearch = (!searchQuery || 
+          p.nama.toLowerCase().includes(searchQuery) ||
+          p.lokasi.toLowerCase().includes(searchQuery) ||
+          (p.notes && p.notes.toLowerCase().includes(searchQuery)) ||
+          p.no.toString().includes(searchQuery)
+        );
+        return matchKat && matchSearch;
+      });
+
+      document.getElementById('countLabel').innerText = `${filtered.length} Titik`;
+
+      // Clear existing markers
+      Object.values(markerMap).forEach(m => map.removeLayer(m));
+      markerMap = {};
+
+      const listContainer = document.getElementById('sheetList');
+      listContainer.innerHTML = '';
+
+      filtered.forEach(p => {
+        const color = getColor(p.kategori);
+        const badgeCls = getBadgeClass(p.kategori);
+
+        // Marker
+        const marker = L.circleMarker([p.lat, p.lon], {
+          radius: p.kategori === 'SSB & SHBJ (Gabungan)' ? 9 : 7,
+          fillColor: color,
+          color: '#ffffff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.9
+        }).addTo(map);
+
+        const popupHtml = `
+          <div class="pop-title">#${p.no} ${p.nama}</div>
+          <div class="pop-badge"><span class="badge ${badgeCls}">${p.kategori}</span></div>
+          <div class="pop-info">
+            <i class="fa-solid fa-location-dot"></i> ${p.lokasi}<br/>
+            ${p.notes ? `<i class="fa-solid fa-comment-dots"></i> <i>${p.notes}</i><br/>` : ''}
+          </div>
+          <a class="pop-btn" href="${p.dir_url}" target="_blank">
+            <i class="fa-solid fa-diamond-turn-right"></i> Rute Navigasi Google Maps
+          </a>
+        `;
+        marker.bindPopup(popupHtml);
+        markerMap[p.no] = marker;
+
+        // Card in Sheet
+        const card = document.createElement('div');
+        card.className = 'resp-card';
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="card-name">#${p.no} ${p.nama}</span>
+            <span class="badge ${badgeCls}">${p.kategori}</span>
+          </div>
+          <div class="card-meta">
+            <span><i class="fa-solid fa-location-dot"></i> ${p.lokasi}</span>
+          </div>
+          ${p.notes ? `<div class="card-notes"><i class="fa-solid fa-info-circle"></i> ${p.notes}</div>` : ''}
+          <div class="card-actions">
+            <button class="btn-action btn-detail" onclick="focusPoint(${p.no})">
+              <i class="fa-solid fa-map-pin"></i> Lihat di Peta
+            </button>
+            <a class="btn-action btn-gmaps" href="${p.dir_url}" target="_blank">
+              <i class="fa-solid fa-diamond-turn-right"></i> Buka GMaps
+            </a>
+          </div>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    function focusPoint(no) {
+      const p = pointsData.find(x => x.no === no);
+      if (p && markerMap[no]) {
+        map.flyTo([p.lat, p.lon], 16, { duration: 0.8 });
+        markerMap[no].openPopup();
+        sheet.classList.remove('open');
+        sheet.classList.add('peek');
+      }
+    }
+
+    function setFilter(kat) {
+      currentFilter = kat;
+      document.querySelectorAll('.pill').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(kat === 'ALL' ? 'Semua' : kat.split(' ')[0]));
+      });
+      render();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+      render();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>

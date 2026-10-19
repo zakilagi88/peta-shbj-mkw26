@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Titik Survei Manokwari (SSB &amp; SHBJ)</name>
+    <description>Peta Titik Responden Survei BPS Manokwari</description>
+    <Style id="style_gabungan">
+      <IconStyle>
+        <color>ff0000ff</color>
+        <scale>1.2</scale>
+        <Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Style id="style_ssb">
+      <IconStyle>
+        <color>ffff0000</color>
+        <scale>1.1</scale>
+        <Icon><href>http://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Style id="style_shbj">
+      <IconStyle>
+        <color>ff00aa00</color>
+        <scale>1.1</scale>
+        <Icon><href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Folder>
+      <name>SSB &amp; SHBJ (Gabungan)</name>
+      <Placemark>
+        <name>[6] Astra Sanggeng</name>
+        <description><![CDATA[<b>No:</b> 6<br/><b>Survei:</b> SSB, SHBJ<br/><b>Lokasi:</b> Sanggeng<br/><b>Nama Tempat Google:</b> Astra Motor Manokwari (Dealer motor Honda)<br/><a href="https://maps.app.goo.gl/v25dWAgXTkibbAv79">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_gabungan</styleUrl>
+        <Point>
+          <coordinates>134.0658172,-0.8632862,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[16] Sinar Suri</name>
+        <description><![CDATA[<b>No:</b> 16<br/><b>Survei:</b> SSB, SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Toyota<br/><a href="https://maps.app.goo.gl/eNukk5Q1yboZZ5QBA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_gabungan</styleUrl>
+        <Point>
+          <coordinates>134.0463768,-0.8683202,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[32] Bengkel Honda (sanggeng)</name>
+        <description><![CDATA[<b>No:</b> 32<br/><b>Survei:</b> SSB, SHBJ<br/><b>Lokasi:</b> Sanggeng<br/><b>Nama Tempat Google:</b> Astra Motor Manokwari (Dealer motor Honda)<br/><a href="https://maps.app.goo.gl/v25dWAgXTkibbAv79">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_gabungan</styleUrl>
+        <Point>
+          <coordinates>134.0658172,-0.8632862,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[34] Bengkel Mobil Sinar Suri</name>
+        <description><![CDATA[<b>No:</b> 34<br/><b>Survei:</b> SSB, SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Toyota<br/><a href="https://maps.app.goo.gl/eNukk5Q1yboZZ5QBA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_gabungan</styleUrl>
+        <Point>
+          <coordinates>134.0463768,-0.8683202,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[46] Bengkel Motor Sinar Suri</name>
+        <description><![CDATA[<b>No:</b> 46<br/><b>Survei:</b> SSB, SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Toyota<br/><a href="https://maps.app.goo.gl/eNukk5Q1yboZZ5QBA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_gabungan</styleUrl>
+        <Point>
+          <coordinates>134.0463768,-0.8683202,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>SSB (Survei Struktur Biaya)</name>
+      <Placemark>
+        <name>[1] Surya Manik</name>
+        <description><![CDATA[<b>No:</b> 1<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Arah Bandara<br/><b>Nama Tempat Google:</b> SURYA MANIK masakan padang<br/><a href="https://maps.app.goo.gl/aSacPJ67CLWnqDBL8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0475218,-0.8693923,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[2] Hokky Bakery</name>
+        <description><![CDATA[<b>No:</b> 2<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Kalawai Mart<br/><b>Catatan:</b> kalawai toh<br/><a href="https://maps.app.goo.gl/vXK62ibW9J9fPopx9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0474365,-0.8734685,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[3] Asrie Modesta</name>
+        <description><![CDATA[<b>No:</b> 3<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Amban<br/><b>Nama Tempat Google:</b> ASRIE MODESTA<br/><a href="https://maps.app.goo.gl/66hDnUgh7EfjfJLB8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0567484,-0.8533987,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[4] Primkoppal</name>
+        <description><![CDATA[<b>No:</b> 4<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Sanggeng<br/><b>Nama Tempat Google:</b> PRIMKOPAL<br/><a href="https://maps.app.goo.gl/AQUYjp176KisZrULA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0646472,-0.8677616,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[7] PT. Kreasi Auto Kencana (Ford)</name>
+        <description><![CDATA[<b>No:</b> 7<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Ford Manokwari<br/><a href="https://maps.app.goo.gl/SyH9rL1PLtWt7k6v8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.05353,-0.8647327,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[9] Bidang Cipta Karya Dinas PUPR Manokwari</name>
+        <description><![CDATA[<b>No:</b> 9<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Ktr Gub<br/><b>Nama Tempat Google:</b> Dinas PUPR Provinsi Papua Barat<br/><a href="https://maps.app.goo.gl/SB6hpdhQifvC6Ffn9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0279201,-0.9184073,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[10] Sagita</name>
+        <description><![CDATA[<b>No:</b> 10<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Arfai<br/><b>Nama Tempat Google:</b> Sagita Furniture - Cv Setia Abadi<br/><b>Catatan:</b> arfai tutup. kota kah?<br/><a href="https://maps.app.goo.gl/LP576pNqBWsC32te9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0729196,-0.8597675,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[12] Lestari</name>
+        <description><![CDATA[<b>No:</b> 12<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> RUMAH MAKAN LESTARI<br/><a href="https://maps.app.goo.gl/hoo9mmNsDUjziMkV8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0464348,-0.8703708,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[13] Ama Bakkery</name>
+        <description><![CDATA[<b>No:</b> 13<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Arfai<br/><b>Nama Tempat Google:</b> Ama Cakes &amp; Bakery<br/><a href="https://maps.app.goo.gl/TYNRnSQHaRWX9B567">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0206594,-0.9295952,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[14] Jakarta Tailor</name>
+        <description><![CDATA[<b>No:</b> 14<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Amban<br/><b>Nama Tempat Google:</b> 5367+4RR, Jl. Gn. Salju, Amban, Kec. Manokwari Bar., Kabupaten Manokwari, Papua Bar. 98312<br/><a href="https://maps.app.goo.gl/ZuZ6Dn8SmxyyNvJGA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0645476,-0.8396119,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[18] Toko Meubel depan Lin Hotel</name>
+        <description><![CDATA[<b>No:</b> 18<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> kota<br/><b>Nama Tempat Google:</b> Manggoapi art<br/><a href="https://maps.app.goo.gl/THTNKQoomSNeemHw8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0699276,-0.8547095,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[20] Ibu Dinda</name>
+        <description><![CDATA[<b>No:</b> 20<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Sanggeng<br/><b>Nama Tempat Google:</b> warung ibudinda<br/><a href="https://maps.app.goo.gl/TaWMsUiwdPrck993A">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.064641,-0.8687915,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[21] Oriestom Bakery</name>
+        <description><![CDATA[<b>No:</b> 21<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Arah Bandara<br/><b>Nama Tempat Google:</b> Oriestom Bay Hotel<br/><a href="https://maps.app.goo.gl/jtwdJLwHV6wFwnBP7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0501061,-0.8762108,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[22] Penjahit Kaca Bulat</name>
+        <description><![CDATA[<b>No:</b> 22<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Penjahit kaca bulat<br/><a href="https://maps.app.goo.gl/mgA55tN3iMxJmnc67">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0460965,-0.8654247,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[24] Kawasaki</name>
+        <description><![CDATA[<b>No:</b> 24<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> borobudur<br/><b>Nama Tempat Google:</b> Dealer motor Kawasaki<br/><a href="https://maps.app.goo.gl/EnZdyF7yhJhkef8u9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0707172,-0.8569325,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[25] DFSK</name>
+        <description><![CDATA[<b>No:</b> 25<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> anday<br/><b>Nama Tempat Google:</b> Dfsk manokwari<br/><a href="https://maps.app.goo.gl/fjsqKXqggTbMsspE9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0001288,-0.9427201,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[27] Meubel Jepara</name>
+        <description><![CDATA[<b>No:</b> 27<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> pasar wosi<br/><b>Nama Tempat Google:</b> Jepara furniture Manokwari<br/><a href="https://maps.app.goo.gl/o72aEwiCHRzFiMD59">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0491243,-0.8668946,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[77] Daihatsu</name>
+        <description><![CDATA[<b>No:</b> 77<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> DAIHATSU MANOKWARI PT. Serba Mulia Auto<br/><a href="https://maps.app.goo.gl/rA2UwL6wLVeSXyVa6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0465147,-0.8720387,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[78] Dealer Resmi Mibil Honda - Wosi</name>
+        <description><![CDATA[<b>No:</b> 78<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> DEALER RESMI MOBIL HONDA MANOKWARI<br/><a href="https://maps.app.goo.gl/WHmW9v9EGi3nHCUCA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0552012,-0.8661637,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[79] Trisakti Megah Indah- Suzuki</name>
+        <description><![CDATA[<b>No:</b> 79<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Suzuki Manokwari Trisakti Megah Indah<br/><a href="https://maps.app.goo.gl/fX7u5AxA5Q31mZK39">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0476531,-0.8745294,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[81] Penjahit Raihan</name>
+        <description><![CDATA[<b>No:</b> 81<br/><b>Survei:</b> SSB<br/><b>Lokasi:</b> Sowi<br/><b>Nama Tempat Google:</b> Penjahit Raihan<br/><a href="https://maps.app.goo.gl/1u2Nhmaj2oCzwpfV9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_ssb</styleUrl>
+        <Point>
+          <coordinates>134.0477907,-0.8632573,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>SHBJ (Survei Harga Barang dan Jasa)</name>
+      <Placemark>
+        <name>[28] Toko Listrik Sinar Mulia (amban)</name>
+        <description><![CDATA[<b>No:</b> 28<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Amban<br/><b>Nama Tempat Google:</b> TOKO LISTRIK SINAR MULIA<br/><a href="https://maps.app.goo.gl/CvVFTQxmJBR3oyPq7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0518252,-0.8459084,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[29] Depo Teguh</name>
+        <description><![CDATA[<b>No:</b> 29<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> kota<br/><b>Nama Tempat Google:</b> DepoTeguh<br/><a href="https://maps.app.goo.gl/vy8AChe9ppnu2c4PA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0740605,-0.8609788,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[30] Sion Music (AMD)</name>
+        <description><![CDATA[<b>No:</b> 30<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> wosi<br/><b>Nama Tempat Google:</b> SION MUSIC<br/><a href="https://maps.app.goo.gl/yqxVxyfxbeZNnbDB7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0466876,-0.8642308,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[31] Hadi (MCM)</name>
+        <description><![CDATA[<b>No:</b> 31<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> kota<br/><b>Nama Tempat Google:</b> Hadi Supermarket Manokwari<br/><a href="https://maps.app.goo.gl/grKthk6XeSwajHsZA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0676451,-0.8569848,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[33] Bengkel Jepara</name>
+        <description><![CDATA[<b>No:</b> 33<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> pasar wosi<br/><b>Nama Tempat Google:</b> Jepara Motor Manokwari<br/><a href="https://maps.app.goo.gl/usY34echA7Tz8wPq9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.049163,-0.8669408,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[35] Manokwari Jaya Ban</name>
+        <description><![CDATA[<b>No:</b> 35<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> MANOKWARI JAYA BAN<br/><a href="https://maps.app.goo.gl/PAFCwv9bDEKGyqEq9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0463841,-0.8713832,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[36] Harapan Baru (borobudur)</name>
+        <description><![CDATA[<b>No:</b> 36<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> borobudur<br/><b>Nama Tempat Google:</b> Toko Harapan Baru<br/><a href="https://maps.app.goo.gl/nsAmoQNGgaUowHc96">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0707854,-0.8571954,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[37] Indo Prima</name>
+        <description><![CDATA[<b>No:</b> 37<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> PT. Indoprima Manokwari Perkasa<br/><a href="https://maps.app.goo.gl/HmWdNQMh2BLQGAfB6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0530846,-0.8632321,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[38] Surya Jaya</name>
+        <description><![CDATA[<b>No:</b> 38<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Surya Jaya Group / Store<br/><a href="https://maps.app.goo.gl/6TbiMpmngSWGu1L28">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.045919,-0.8724348,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[39] Alia</name>
+        <description><![CDATA[<b>No:</b> 39<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> ALIA Digital Printing<br/><b>Catatan:</b> hj bauw<br/><a href="https://maps.app.goo.gl/YF4aJQeT4aqNcFUT6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0525315,-0.8626151,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[40] Dunia Print</name>
+        <description><![CDATA[<b>No:</b> 40<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Dunia Print<br/><b>Catatan:</b> hj bauw<br/><a href="https://maps.app.goo.gl/WPErDruuZnv55bz7A">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0528574,-0.8626433,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[42] Toko Listrik Golden Sheena (wosi)</name>
+        <description><![CDATA[<b>No:</b> 42<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Toko Listrik Golden Sheena<br/><b>Catatan:</b> sederet aneka bangunan<br/><a href="https://maps.app.goo.gl/KdBCpUseqJLS7vXb9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.049549,-0.8633123,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[43] Depo Makmur</name>
+        <description><![CDATA[<b>No:</b> 43<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Depo Makmur Manokwari<br/><b>Catatan:</b> hj bauw<br/><a href="https://maps.app.goo.gl/8dX8KpuDpWn1z6fp8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0521741,-0.8630402,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[44] Glodok Makmur (hj bauw)</name>
+        <description><![CDATA[<b>No:</b> 44<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Glodok Makmur<br/><b>Catatan:</b> hj bauw<br/><a href="https://maps.app.goo.gl/3d33L5KJ5FBJAYpM8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0525908,-0.8627747,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[45] Orchid</name>
+        <description><![CDATA[<b>No:</b> 45<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> kota<br/><a href="https://maps.app.goo.gl/mSC6p9AUT7rhXGNt8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.052124,-0.862605,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[47] Makmur Motor</name>
+        <description><![CDATA[<b>No:</b> 47<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> MAKMUR MOTOR<br/><a href="https://maps.app.goo.gl/BocoSJTr497QkARn8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0448731,-0.8961207,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[48] Auto Mobil</name>
+        <description><![CDATA[<b>No:</b> 48<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> AUTO MOBIL<br/><a href="https://maps.app.goo.gl/ym31BuGi2qtvUx2c6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0460776,-0.8925414,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[49] Serba Mulia Auto</name>
+        <description><![CDATA[<b>No:</b> 49<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> PT. Serba Mulia Auto Manokwari<br/><a href="https://maps.app.goo.gl/u8LCVRtuYbcehEK96">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0464767,-0.8722332,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[50] Papua Ban</name>
+        <description><![CDATA[<b>No:</b> 50<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> PAPUA BAN/ bakti makmur mobil<br/><a href="https://maps.app.goo.gl/WsQCRCwgd3bbFUnU9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0465581,-0.8912579,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[51] Senyum 5000 (jalan baru)</name>
+        <description><![CDATA[<b>No:</b> 51<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><a href="https://maps.app.goo.gl/QikmNvk1D2vHtFWj7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.046274,-0.873093,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[52] CV Tintur</name>
+        <description><![CDATA[<b>No:</b> 52<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> TINTUR JAYA<br/><b>Catatan:</b> tintur jaya?<br/><a href="https://maps.app.goo.gl/3tLAea5oYQJmJ7K2A">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0470999,-0.8605253,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[53] Itech</name>
+        <description><![CDATA[<b>No:</b> 53<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><a href="https://maps.app.goo.gl/vwpbq94YD1yuihVh8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.046436,-0.870568,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[54] Galilea</name>
+        <description><![CDATA[<b>No:</b> 54<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> kota<br/><b>Nama Tempat Google:</b> GALILEA KOMPUTER<br/><a href="https://maps.app.goo.gl/Bgrzt2f9JMZSH2cZ7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0741749,-0.8632236,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[55] X-ADVERTISING</name>
+        <description><![CDATA[<b>No:</b> 55<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> X ADVERTISING<br/><a href="https://maps.app.goo.gl/bEQJaxmma5JXpdxaA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0464724,-0.8707211,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[57] TIKI</name>
+        <description><![CDATA[<b>No:</b> 57<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> TIKI Cabang Manokwari<br/><a href="https://maps.app.goo.gl/HzKMg9mknvrB7b717">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0555701,-0.8669766,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[58] Chival Mandiri Cargo</name>
+        <description><![CDATA[<b>No:</b> 58<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Bandara<br/><b>Nama Tempat Google:</b> PT. Chival Mandiri Cargo ( Chival Cargo )<br/><a href="https://maps.app.goo.gl/cWJzcZir38YjR8PL7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0430209,-0.8878626,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[60] Aneka Bangunan</name>
+        <description><![CDATA[<b>No:</b> 60<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> ANEKA BANGUNAN<br/><a href="https://maps.app.goo.gl/1QDwK5XXjU6xMXeaA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0498559,-0.8631883,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[61] Mega Glodok (wosi)</name>
+        <description><![CDATA[<b>No:</b> 61<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Mega Glodok Manokwari<br/><a href="https://maps.app.goo.gl/euL8LVFMgftAcYA46">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0496346,-0.8632167,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[62] Kalawai</name>
+        <description><![CDATA[<b>No:</b> 62<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Kalawai Mart<br/><a href="https://maps.app.goo.gl/Lsrm3vwwnqJgyN2u6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0474365,-0.8734685,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[63] Ada Motor</name>
+        <description><![CDATA[<b>No:</b> 63<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Bengkel Ada Motor<br/><a href="https://maps.app.goo.gl/QgafyN3sNFn5rTLB6">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0462692,-0.8707698,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[64] Bengkel Manohara</name>
+        <description><![CDATA[<b>No:</b> 64<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Arah Bandara<br/><b>Nama Tempat Google:</b> Bengkel Manohara-Wosi<br/><a href="https://maps.app.goo.gl/31jEvNFoTqRpo1ZMA">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0468957,-0.8680115,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[65] Aneka Ban</name>
+        <description><![CDATA[<b>No:</b> 65<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Jalan Baru<br/><b>Nama Tempat Google:</b> Aneka Ban &amp; Variasi<br/><a href="https://maps.app.goo.gl/JQnbBTgP6bayuBbB8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0462699,-0.8693934,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[66] Nurati</name>
+        <description><![CDATA[<b>No:</b> 66<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Sanggeng<br/><b>Nama Tempat Google:</b> Toko Nur Ati<br/><a href="https://maps.app.goo.gl/6WJi5kyR91kynZyx7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0655113,-0.8650034,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[67] Rezeki (wosi)</name>
+        <description><![CDATA[<b>No:</b> 67<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Toko Rezeki Senang Hati<br/><a href="https://maps.app.goo.gl/f47stkQ1GDLkJ7kC8">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0532698,-0.8643102,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[68] Surma Agung</name>
+        <description><![CDATA[<b>No:</b> 68<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> borobudur<br/><b>Nama Tempat Google:</b> SURMA AGUNG<br/><a href="https://maps.app.goo.gl/3s8n9FiohUE8CS2H7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0708406,-0.8572643,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[69] Urban Tech</name>
+        <description><![CDATA[<b>No:</b> 69<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> anday<br/><b>Nama Tempat Google:</b> UrbanTech Store<br/><a href="https://maps.app.goo.gl/ooVz33UtsbT8C3BS9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0326572,-0.9294216,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[70] Toko ATK dekat AMD</name>
+        <description><![CDATA[<b>No:</b> 70<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Suri Gracia<br/><a href="https://maps.app.goo.gl/LezNp5XwTucLbqpc9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0468837,-0.8639612,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[71] Matahari Digital Printing</name>
+        <description><![CDATA[<b>No:</b> 71<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Matahari Digital Printing<br/><a href="https://maps.app.goo.gl/oYXtDXMYZnCKYheP7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0476701,-0.8635931,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[73] Lion Parcel</name>
+        <description><![CDATA[<b>No:</b> 73<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> Lion Parcel - Yos Soedarso MKW<br/><a href="https://maps.app.goo.gl/jzpjCob3B8vyUwgy5">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0690309,-0.854743,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[74] JNE</name>
+        <description><![CDATA[<b>No:</b> 74<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> (Belum Ditentukan)<br/><b>Nama Tempat Google:</b> 0°52&#x27;25.7&quot;S 134°02&#x27;56.8&quot;E<br/><b>Catatan:</b> lupa letaknya, dekat klaten?<br/><a href="https://maps.app.goo.gl/rt5La8m2QGgtgmMW7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0491213,-0.8737928,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[75] JNT</name>
+        <description><![CDATA[<b>No:</b> 75<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> (Belum Ditentukan)<br/><b>Nama Tempat Google:</b> JnT Manokwari<br/><b>Catatan:</b> lupa letaknya, ada di maps<br/><a href="https://maps.app.goo.gl/yyJUJnokSeqrozE7A">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0541852,-0.865709,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[80] Toko Perdana</name>
+        <description><![CDATA[<b>No:</b> 80<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> kota<br/><b>Nama Tempat Google:</b> Toko Perdana<br/><a href="https://maps.app.goo.gl/DX3dezkjMgwonykY7">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0702895,-0.8554639,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[82] Makarios</name>
+        <description><![CDATA[<b>No:</b> 82<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Sowi<br/><b>Nama Tempat Google:</b> CV. MAKARIOS<br/><a href="https://maps.app.goo.gl/nyvTZNBDkXAguJyz5">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.0460821,-0.8864007,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[83] Wicom</name>
+        <description><![CDATA[<b>No:</b> 83<br/><b>Survei:</b> SHBJ<br/><b>Lokasi:</b> Wosi<br/><b>Nama Tempat Google:</b> WICOM KOMPUTER - Toko Laptop, cctv, Printer &amp; Servis Komputer Manokwari<br/><a href="https://maps.app.goo.gl/SPsftf43Ftehi6RX9">Buka Google Maps</a>]]></description>
+        <styleUrl>#style_shbj</styleUrl>
+        <Point>
+          <coordinates>134.050696,-0.8630717,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
